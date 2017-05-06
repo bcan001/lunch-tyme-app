@@ -8,7 +8,8 @@ class RestaurantsController < ApplicationController
 
 	  @close_restaurants = Yelp.client.search(@user_city,user_search_params,user_locale)
 
-	 
+	 	
+	 	# binding.pry
 
 	 
 
