@@ -4,7 +4,7 @@ describe 'restaurants/index.html.erb' do
 
 	before(:each) do |example|
 		unless example.metadata[:skip_initialize_user]
-			assign(:current_user, FactoryGirl.create(:user))
+			assign(:current_user, FactoryGirl.build_stubbed(:user, email: 'bill@gmail.com'))
 		end
 		controller.singleton_class.class_eval do
       protected
