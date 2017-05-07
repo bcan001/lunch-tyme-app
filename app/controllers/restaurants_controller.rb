@@ -22,12 +22,8 @@ class RestaurantsController < ApplicationController
 	  	@user_search_params = return_user_search_params_without_search
 	  	fetch_retaurants_of_the_day_and_past_week_for_index
 
-	  	# @restaurants_of_the_day = {
-		  #   :restaurants => @restaurants
-		  # }
-
-		  @presenter = {
-	      :comments => @restaurants_of_the_day
+		  @restaurants_of_the_day = {
+	      :suggested_restaurants => @restaurants_of_the_day
 	    }
   	end
   end
