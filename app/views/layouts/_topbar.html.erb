@@ -1,0 +1,19 @@
+<div class="top-bar">
+  <div class="row">
+    <div class="top-bar-left">
+      <%= link_to "LOGO HERE", root_path %>
+    </div>
+    <div class="top-bar-right">
+      <div class="row">
+        <div class="medium-12 columns">
+          <% if current_user %>
+            <%= link_to "SIGN OUT", destroy_user_session_path, method: :delete  %>
+          <% else %>
+            <%= link_to "SIGN IN", new_user_session_path %>
+            <%= link_to "SIGN UP", new_user_registration_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
