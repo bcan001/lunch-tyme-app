@@ -2,8 +2,10 @@ var RestaurantOfTheDay = React.createClass({
   render: function () {
     return (
       <div className="medium-4 columns">
-        <h4>{ this.props.name }</h4>
-        <h4>{ this.props.phone }</h4>
+      	<img src={ this.props.image_url }></img>
+        <h5>{ this.props.name }</h5>
+      	<img src={ this.props.rating_img_url_small }></img>
+        <p>{ this.props.phone }</p>
       </div>
     )
   }

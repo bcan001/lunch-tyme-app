@@ -25,7 +25,12 @@ class RestaurantsController < ApplicationController
 		  @restaurants_of_the_day = {
 	      :suggested_restaurants => @restaurants_of_the_day
 	    }
+
+	    @historical_restaurants = Kaminari.paginate_array(@historical_restaurants_array).page(params[:page]).per(2)
+
   	end
+
+
   end
 
   private
@@ -34,6 +39,13 @@ class RestaurantsController < ApplicationController
   	@restaurants = Yelp.client.search(current_user.current_location_city,@user_search_params,current_user.user_locale).businesses
 
   	@restaurants_of_the_day = @restaurants[0..2]
+
+  	@historical_restaurants_array = [
+  		{date: Date.today, restaurants: [{name: 'restaurant 1'},{name: 'restaurant 2'}]},
+  		{date: (Date.today - 1), restaurants: [{name: 'restaurant 3'},{name: 'restaurant 4'}]},
+  		{date: (Date.today - 2), restaurants: [{name: 'restaurant 5'},{name: 'restaurant 6'}]},
+  		{date: (Date.today - 3), restaurants: [{name: 'restaurant 7'},{name: 'restaurant 8'}]}
+  	]
 
   	# NEED 3 RESTAURANTS OF THE DAY (TODAY)
 	  # NEED 5 RESTAURANTS FOR TODAY, YESTERDAY, DAY BEFORE (PAGINATED)
