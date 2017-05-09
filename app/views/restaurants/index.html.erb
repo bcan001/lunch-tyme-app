@@ -37,20 +37,18 @@
 
 
 <div id='historical-restaurants'>
-	<%= render partial: "restaurants/partials/historical_restaurant", collection: @historical_restaurants, as: :historical_restaurant %>
+	<div class="restaurant">
+		<%= render partial: "restaurants/partials/historical_restaurant", collection: @historical_restaurants, as: :historical_restaurant %>
+	</div>
 </div>
 
 <div class='row'>
 	<div class='medium-12 columns ctr'>
 	  <div id='paginator'>
-	    <%= paginate @historical_restaurants, remote: true %>
+	    <%= paginate @historical_restaurants %>
 	  </div>
 	</div>
 </div>
-
-
-
-
 
 
 
