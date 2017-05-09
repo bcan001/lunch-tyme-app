@@ -22,12 +22,12 @@
 
 <!-- foundation tabs -->
 <div class="column row pad2">
-	<ul class="tabs" data-tabs id="index-tabs">
+	<ul class="tabs" data-tabs id="restaurant-tabs">
 	  <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Menu</a></li>
 	  <li class="tabs-title"><a href="#panel2" onclick="reviewsClick()">Reviews</a></li>
 	  <li class="tabs-title"><a href="#panel3" onclick="aboutClick()">About</a></li>
 	</ul>
-	<div class="tabs-content" data-tabs-content="index-tabs">
+	<div class="tabs-content" data-tabs-content="restaurant-tabs">
   	<div class="tabs-panel is-active" id="panel1">
   		<div id="menu">
   			render menu here
@@ -43,6 +43,9 @@
 </div>
 
 
+<script>
+  $(document).foundation();
+</script>
 
 <script>
   function reviewsClick(event){
