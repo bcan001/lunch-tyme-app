@@ -27,11 +27,18 @@ class RestaurantsController < ApplicationController
 	    }
 
 	    @historical_restaurants = Kaminari.paginate_array(@historical_restaurants_array).page(params[:page]).per(1)
-
   	end
-
-
   end
+
+
+  def show
+  	@yelp_restaurant_id = params[:id]
+  	@restaurant = Yelp.client.business(@yelp_restaurant_id).business
+
+  	
+  end
+
+
 
   private
   		
@@ -40,12 +47,13 @@ class RestaurantsController < ApplicationController
 
   	@restaurants_of_the_day = @restaurants[0..2]
 
-  	@historical_restaurants_array = [
-  		{date: Date.today, restaurants: [{name: 'restaurant 1'},{name: 'restaurant 2'}]},
-  		{date: (Date.today - 1), restaurants: [{name: 'restaurant 3'},{name: 'restaurant 4'}]},
-  		{date: (Date.today - 2), restaurants: [{name: 'restaurant 5'},{name: 'restaurant 6'}]},
-  		{date: (Date.today - 3), restaurants: [{name: 'restaurant 7'},{name: 'restaurant 8'}]}
-  	]
+  	@historical_restaurants_array = []
+  	@date_counter = 0
+  	8.times do 
+  		@historical_restaurants_array << {date: (Date.today - @date_counter).to_s(:long), restaurants: [@restaurants[0],@restaurants[1],@restaurants[2],@restaurants[0],@restaurants[1],@restaurants[2] ] }
+  		@date_counter += 1
+  	end
+
 
   	# NEED 3 RESTAURANTS OF THE DAY (TODAY)
 	  # NEED 5 RESTAURANTS FOR TODAY, YESTERDAY, DAY BEFORE (PAGINATED)

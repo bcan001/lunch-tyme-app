@@ -1,6 +1,9 @@
 <div class="row ctr">
-	<h3>FOOD IN YOUR NEIGHBORHOOD</h3>
+	<div class="medium-12 columns">
+		<h3>FOOD IN YOUR NEIGHBORHOOD</h3>
+	</div>
 </div>
+
 
 <div class="row">
 	<div class="medium-12 columns">
@@ -10,11 +13,15 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="medium-offset-4 columns">
+<div class="row ctr">
+	<div class="medium-12 columns">
 		<%= form_tag restaurants_path, :method => 'get' do %>
 		  <%= hidden_field_tag :current_user_location, '' %>
-		  <%= text_field_tag :search, params[:search] %>
+
+
+		  <p><%= text_field_tag :search, params[:search], class: 'entry big' %></p>
+
+		
 		  <%= submit_tag "Find Food Now", :name => 'find_food_based_on_search', class: "button light" %>
 		  <%= submit_tag "Decide For Me", :name => 'find_food_based_on_history', class: "button light" %>
 		<% end %>
@@ -28,8 +35,10 @@
 </div>
 
 <div class="row ctr">
-	<h4>RESTAURANTS OF THE DAY</h4>
-	<h5><%= Date.today %></h5>
+	<div class="medium-12 columns">
+		<h4>RESTAURANTS OF THE DAY</h4>
+		<h5><%= Date.today.to_s(:long) %></h5>
+	</div>
 </div>
 
 <!-- re-render whenever someone votes on a restaurant -->

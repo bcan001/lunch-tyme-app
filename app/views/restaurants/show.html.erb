@@ -1,0 +1,65 @@
+<div class="row pad5">
+	<div class="medium-2 columns">
+		<img src="<%= @restaurant.image_url %>", width="120" , height="120"></img>
+	</div>
+	<div class="medium-2 columns">
+		<%= link_to @restaurant.name, restaurant_path(@restaurant.id) %>
+	</div>
+	<div class="medium-2 columns">
+		<img src="<%= @restaurant.rating_img_url_small %>"></img>
+	</div>
+	<div class="medium-2 columns">
+		<%= @restaurant.phone %>
+	</div>
+	<div class="medium-2 columns">
+		link to menu
+	</div>
+	<div class="medium-2 columns">
+		link to order
+	</div>
+</div>
+
+
+<!-- foundation tabs -->
+<div class="column row pad2">
+	<ul class="tabs" data-tabs id="index-tabs">
+	  <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Menu</a></li>
+	  <li class="tabs-title"><a href="#panel2" onclick="reviewsClick()">Reviews</a></li>
+	  <li class="tabs-title"><a href="#panel3" onclick="aboutClick()">About</a></li>
+	</ul>
+	<div class="tabs-content" data-tabs-content="index-tabs">
+  	<div class="tabs-panel is-active" id="panel1">
+  		<div id="menu">
+  			render menu here
+  		</div>
+  	</div>
+  	<div class="tabs-panel" id="panel2">
+  		<div id="reviews"></div>
+  	</div>
+  	<div class="tabs-panel" id="panel3">
+  		<div id="about"></div>
+  	</div>
+  </div>
+</div>
+
+
+
+<script>
+  function reviewsClick(event){
+    $.ajax({
+      url: "<%= restaurant_path(@restaurant.id, tab: 'reviews') %>",
+      method: "get",
+      dataType: 'script'
+    })
+  };
+
+  function aboutClick(event){
+    $.ajax({
+      url: "<%= restaurant_path(@restaurant.id, tab: 'about') %>",
+      method: "get",
+      dataType: 'script'
+    })
+  };
+</script>
+
+
