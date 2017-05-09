@@ -3,9 +3,11 @@ var RestaurantOfTheDay = React.createClass({
     return (
       <div className="medium-4 columns">
       	<img src={ this.props.image_url }></img>
-        <h5>{ this.props.name }</h5>
+        <p><a href={"/restaurants/" + this.props.id}>{ this.props.name }</a></p>
       	<img src={ this.props.rating_img_url_small }></img>
         <p>{ this.props.phone }</p>
+        <p>link to menu</p>
+        <p>link to order</p>
       </div>
     )
   }
