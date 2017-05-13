@@ -1,3 +1,18 @@
 <p><%= restaurant.methods %></p>
 <p><%= restaurant.menu_date_updated %></p>
 <p><%= restaurant.menu_provider %></p>
+
+<div class="row pad5">
+	<div class="medium-12 columns">
+		<hr>
+	</div>
+</div>
+
+<% @menu[:categories].each do |category| %>
+	<div class="row pad5">
+		<div class="medium-12 columns">
+			<p><%= category[:name] %></p>
+			<p><%= category[:description] %></p>
+		</div>
+	</div>
+<% end %>

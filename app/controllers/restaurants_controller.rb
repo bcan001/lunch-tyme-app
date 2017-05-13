@@ -35,6 +35,11 @@ class RestaurantsController < ApplicationController
   	@yelp_restaurant_id = params[:id]
   	@restaurant = Yelp.client.business(@yelp_restaurant_id).business
 
+  	unless ((params[:tab] == 'reviews') || (params[:tab] == 'about'))
+  		@menu = Menu.new({restaurant_id: 'fatsos-last-stand-chicago-2'}).build_menu
+  		
+  	end
+
   	
   end
 
