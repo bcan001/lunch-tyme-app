@@ -1,0 +1,8 @@
+<div class="row">
+	<div class="medium-12 columns">
+		<%= restaurant.id %>
+		<% restaurant.location.display_address.each do |address_line| %>
+			<p><%= address_line %></p>
+		<% end %>
+	</div>
+</div>

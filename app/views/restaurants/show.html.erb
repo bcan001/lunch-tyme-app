@@ -2,22 +2,44 @@
 	<div class="medium-2 columns">
 		<img src="<%= @restaurant.image_url %>", width="120" , height="120"></img>
 	</div>
-	<div class="medium-2 columns">
-		<%= link_to @restaurant.name, restaurant_path(@restaurant.id) %>
-	</div>
-	<div class="medium-2 columns">
-		<img src="<%= @restaurant.rating_img_url_small %>"></img>
-	</div>
-	<div class="medium-2 columns">
-		<%= @restaurant.phone %>
-	</div>
-	<div class="medium-2 columns">
-		link to menu
-	</div>
-	<div class="medium-2 columns">
-		link to order
-	</div>
+
+  <div class="medium-10 columns">
+    <div class="row pad5">
+    	<div class="medium-3 columns">
+    		<%= link_to @restaurant.name, restaurant_path(@restaurant.id) %>
+    	</div>
+    	<div class="medium-2 columns">
+    		<img src="<%= @restaurant.rating_img_url_small %>"></img>
+    	</div>
+    	<div class="medium-2 columns">
+    		<%= @restaurant.phone %>
+    	</div>
+    	<div class="medium-2 columns">
+    		link to menu
+    	</div>
+    	<div class="medium-2 columns">
+    		link to order
+    	</div>
+    </div>
+    <div class="row pad5">
+      <div class="medium-6 columns">
+        <% @restaurant.location.display_address.each do |address_line| %>
+          <p><%= address_line %></p>
+        <% end %>
+      </div>
+      <div class="medium-6 columns">
+      <% if @restaurant.is_closed == "false" %>
+        <p>OPEN NOW</p>
+      <% else %>
+        <p>CURRENTLY CLOSED</p>
+      <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
 
 
 <!-- foundation tabs -->
@@ -30,7 +52,7 @@
 	<div class="tabs-content" data-tabs-content="restaurant-tabs">
   	<div class="tabs-panel is-active" id="panel1">
   		<div id="menu">
-  			render menu here
+  			<%= render partial: 'restaurants/partials/menu', object: @restaurant, as: :restaurant %>
   		</div>
   	</div>
   	<div class="tabs-panel" id="panel2">

@@ -1,1 +1,2 @@
-$("div#historical-restaurants").append('<%= escape_javascript(render partial: "restaurants/partials/historical_restaurant", collection: @historical_restaurants, as: :historical_restaurant) %>');
+$('div#historical-restaurants').html('<%= escape_javascript(render partial: "restaurants/partials/historical_restaurant", collection: @historical_restaurants, as: :historical_restaurant) %>');
+$('#paginator').html('<%= escape_javascript(paginate(@historical_restaurants, :remote => true).to_s) %>');
