@@ -26,7 +26,7 @@ class RestaurantsController < ApplicationController
 	      :suggested_restaurants => @restaurants_of_the_day
 	    }
 
-	    @historical_restaurants = Kaminari.paginate_array(@historical_restaurants_array).page(params[:page]).per(1)
+	    @historical_restaurants = Kaminari.paginate_array(@historical_restaurants_array).page(params[:page]).per(5)
   	end
   end
 

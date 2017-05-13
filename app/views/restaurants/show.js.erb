@@ -1,5 +1,5 @@
 "<% if params[:tab] == 'reviews' %>"	
-	console.log('append reviews');
+	$('div#reviews').html('<%= escape_javascript(render partial: "restaurants/partials/reviews", object: @restaurant, as: :restaurant) %>');
 "<% elsif params[:tab] == 'about' %>"	
-	console.log('append about');
+	$('div#about').html('<%= escape_javascript(render partial: "restaurants/partials/about", object: @restaurant, as: :restaurant) %>');
 "<% end %>"

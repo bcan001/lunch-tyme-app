@@ -51,10 +51,10 @@
 	</div>
 </div>
 
-<div class='row'>
+<div class='row pad5'>
 	<div class='medium-12 columns ctr'>
 	  <div id='paginator'>
-	    <%= paginate @historical_restaurants %>
+	    <%= paginate @historical_restaurants, remote: true %>
 	  </div>
 	</div>
 </div>
