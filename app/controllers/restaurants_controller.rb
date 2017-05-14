@@ -36,11 +36,11 @@ class RestaurantsController < ApplicationController
   	@restaurant = Yelp.client.business(@yelp_restaurant_id).business
 
   	unless ((params[:tab] == 'reviews') || (params[:tab] == 'about'))
-  		@menu = Menu.new({restaurant_id: 'fatsos-last-stand-chicago-2'}).build_menu
-  		
+  		@menu = Menu.new({restaurant_id: 'fatsos-last-stand-chicago-2', restaurant_lat: @restaurant.location.coordinate.latitude, restaurant_lon: @restaurant.location.coordinate.longitude}).build_menu
+
   	end
 
-  	
+
   end
 
 
