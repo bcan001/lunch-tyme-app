@@ -10,8 +10,9 @@ class User < ApplicationRecord
     if Rails.env.production?
 		  request.remote_ip
 		else
-			"148.90.78.177"
-		  # Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+			# '73.110.34.185'
+			# "148.90.78.177"
+		  Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
 		  # "69.128.144.127"
 		end
   end
