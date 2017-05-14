@@ -1,0 +1,35 @@
+
+require 'open-uri'
+require 'json'
+
+# set api token and url
+auth_token = "3053396b65d3f5badf510c8b1059a76c"
+polling_url = "http://polling.3taps.com/poll"
+
+
+# grab data until up to date
+loop do
+
+
+	# specify request parameters
+	params = {
+		auth_token: auth_token,
+		anchor: Anchor.first.value,
+		source: "CRAIG",
+		category_group: "RRRR",
+		category: "RHFR",
+		# if there's a period in the middle, use the hash rocket symbol instead
+		'location.city' => "USA-CHI-CHI",
+		retvals: "location,external_url,heading,body,timestamp,price,images,annotations"
+	}
+
+	# prepare api request
+	# start with the base url, then add parameters from the params variable above
+	# parse method, takes string and converts it into a uri object, which we need in a data request
+	uri = URI.parse(polling_url)
+	# takes the array of paramaters and converts it into the format with www and = signs
+	uri.query = URI.encode_www_form(params)
+
+	# submit request
+	# wrap result in JSON.parse() to print out in a better fomat
+	result = JSON.parse(open(uri).read)
