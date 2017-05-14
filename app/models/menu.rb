@@ -5,6 +5,7 @@ class Menu
 		@restaurant_id = args[:restaurant_id]
 		@restaurant_lat = args[:restaurant_lat]
 		@restaurant_lon = args[:restaurant_lon]
+		@yelp_restaurant = args[:yelp_restaurant]
 
 
 		# @yelp_url = "https://www.yelp.com/menu/" + @restaurant_id
@@ -17,16 +18,21 @@ class Menu
 		require 'open-uri'
 		require 'json'
 
-		params = {
+		@params = {
 				"lat" => @restaurant_lat,
 				"lon" => @restaurant_lon
 			}
 
-		uri = URI.parse("#{@zomato_api_endpoint}/geocode")
-		uri.query = URI.encode_www_form(params)
-		result = JSON.parse(open(uri, {"user-key" => "c811bf533cfe6a3a6cdd61875a78ea39"}).read)
 
-		result[:location][:nearby_restaurants].each do |restaurant|
+		@uri = URI.parse("#{@zomato_api_endpoint}/geocode")
+		@uri.query = URI.encode_www_form(@params)
+		@result = JSON.parse(open(@uri, {"user-key" => "c811bf533cfe6a3a6cdd61875a78ea39"}).read)
+
+		@result['nearby_restaurants'].each do |nearby_restaurant|
+			# compare with @yelp_restaurant to get nearby_restaurant['restaurant']['R']['res_id']
+			# nearby_restaurant[:restaurant]['name']
+			# nearby_restaurant[:restaurant]['address']
+			# nearby_restaurant[:restaurant]['city']
 
 
 
