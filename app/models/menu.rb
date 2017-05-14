@@ -1,17 +1,16 @@
 class Menu
 
-	
 	def initialize(args)	
 		@restaurant_id = args[:restaurant_id]
 		@restaurant_lat = args[:restaurant_lat]
 		@restaurant_lon = args[:restaurant_lon]
 		@yelp_restaurant = args[:yelp_restaurant]
-
+		@zomato_restaurant_id = nil
+		@menu_url = nil
 
 		# @yelp_url = "https://www.yelp.com/menu/" + @restaurant_id
 		@zomato_api_endpoint = "https://developers.zomato.com/api/v2.1"
 		@restaurant = get_restaurant_from_zomato
-		
 	end
 
 	def get_restaurant_from_zomato
@@ -23,24 +22,34 @@ class Menu
 				"lon" => @restaurant_lon
 			}
 
-
-		@uri = URI.parse("#{@zomato_api_endpoint}/geocode")
-		@uri.query = URI.encode_www_form(@params)
-		@result = JSON.parse(open(@uri, {"user-key" => "c811bf533cfe6a3a6cdd61875a78ea39"}).read)
+		@result = query_zomato({"user-key" => "c811bf533cfe6a3a6cdd61875a78ea39"},{"lat" => @restaurant_lat,"lon" => @restaurant_lon},'geocode')
 
 		@result['nearby_restaurants'].each do |nearby_restaurant|
 			# compare with @yelp_restaurant to get nearby_restaurant['restaurant']['R']['res_id']
-			# nearby_restaurant[:restaurant]['name']
-			# nearby_restaurant[:restaurant]['address']
-			# nearby_restaurant[:restaurant]['city']
+			# nearby_restaurant['restaurant']['name']
+			# nearby_restaurant['restaurant']['address']
+			# nearby_restaurant['restaurant']['city']
 
+			@zomato_address = nearby_restaurant['restaurant']['location']['address'].scan(/\d+/).join
+			@yelp_address = @yelp_restaurant[:address].scan(/\d+/).join
 
+			if @zomato_address.include?(@yelp_address) || @yelp_address.include?(@zomato_address)
+				@zomato_restaurant_id = nearby_restaurant['restaurant']['R']['res_id']
+			end
 
 		end
 
-		# binding.pry
+		@result = query_zomato({"user-key" => "c811bf533cfe6a3a6cdd61875a78ea39"},{"res_id" => @zomato_restaurant_id},'restaurant')
+
+		@menu_url = @result['menu_url']
+	end
 
 
+	def query_zomato(header_params,query_params,endpoint_extension)
+		@params = header_params
+		@uri = URI.parse("#{@zomato_api_endpoint}/#{endpoint_extension}")
+		@uri.query = URI.encode_www_form(@params)
+		JSON.parse(open(@uri, header_params).read)
 	end
 
 
@@ -64,7 +73,9 @@ class Menu
 
 
 
-		@menu = {categories: [
+		@menu = {
+			menu_url: @menu_url,
+			categories: [
 				{
 					name:'Fatso Burger',
 					description:'All Fatso Burgers served on a toasted bub, grilled on an open flame and includes, Fatso Sauce, Lettuce, Tomato and Onions (Want Grilled Onion? Just ask!). Add Bacon or Fried Egg for $1.25', items: [
