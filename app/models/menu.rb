@@ -7,11 +7,20 @@ class Menu
 		@yelp_restaurant = args[:yelp_restaurant]
 		@zomato_restaurant_id = nil
 		@menu_url = nil
+		# @daily_menu = nil
 
-		# @yelp_url = "https://www.yelp.com/menu/" + @restaurant_id
+		@yelp_menu_endpoint = "https://www.yelp.com/menu/"
 		@zomato_api_endpoint = "https://developers.zomato.com/api/v2.1"
+
 		@restaurant = get_restaurant_from_zomato
+		# scrape_yelp_for_menu(@restaurant_id)
 	end
+
+	# def scrape_yelp_for_menu(yelp_restaurant_id)
+	# 	# yelp_restaurant_id = @restaurant_id
+	# 	@yelp_menu_url = @yelp_menu_endpoint + yelp_restaurant_id
+	# 	@response = HTTParty.get(@yelp_menu_url)
+	# end
 
 	def get_restaurant_from_zomato
 		require 'open-uri'
@@ -39,9 +48,21 @@ class Menu
 
 		end
 
+		# if @zomato_restaurant_id == nil
+		# 	@zomato_restaurant_id = @result['nearby_restaurants'][0]['restaurant']['R']['res_id']
+		# end
+
+
 		@result = query_zomato({"user-key" => "c811bf533cfe6a3a6cdd61875a78ea39"},{"res_id" => @zomato_restaurant_id},'restaurant')
 
 		@menu_url = @result['menu_url']
+
+
+
+		# @result = query_zomato({"user_key" => "c811bf533cfe6a3a6cdd61875a78ea39"},{"res_id" => @zomato_restaurant_id},'dailymenu')
+
+		# @daily_menu = @result
+
 	end
 
 
@@ -74,6 +95,7 @@ class Menu
 
 
 		@menu = {
+			# daily_menu: @daily_menu,
 			menu_url: @menu_url,
 			categories: [
 				{
