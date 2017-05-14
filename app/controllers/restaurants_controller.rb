@@ -55,7 +55,7 @@ class RestaurantsController < ApplicationController
   	@historical_restaurants_array = []
   	@date_counter = 0
   	8.times do 
-  		@historical_restaurants_array << {date: (Date.today - @date_counter).to_s(:long), restaurants: [@restaurants[0],@restaurants[1],@restaurants[2],@restaurants[0],@restaurants[1],@restaurants[2] ] }
+  		@historical_restaurants_array << {date: (Date.today - @date_counter).to_s(:long), restaurants: [@restaurants[0],@restaurants[1],@restaurants[2],@restaurants[3],@restaurants[4],@restaurants[5] ] }
   		@date_counter += 1
   	end
 

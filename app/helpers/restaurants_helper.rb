@@ -4,7 +4,7 @@ module RestaurantsHelper
 		# https://www.yelp.com/developers/documentation/v2/search_api
 		{
 			term: 'food',
-			limit: 3,
+			limit: 10,
 			sort: 0 # 0=best matched, 1=distance, 2=highest rated
 			# category_filter: , # category to filter search results https://www.yelp.com/developers/documentation/v2/all_category_list
 			# radius_filter: , # search radius, in meters. The max value is 40000 meters (25 miles).
@@ -16,7 +16,7 @@ module RestaurantsHelper
 		# https://www.yelp.com/developers/documentation/v2/search_api
 		{
 			term: 'food',
-			limit: 3,
+			limit: 10,
 			sort: 0 # 0=best matched, 1=distance, 2=highest rated
 			# category_filter: , # category to filter search results https://www.yelp.com/developers/documentation/v2/all_category_list
 			# radius_filter: , # search radius, in meters. The max value is 40000 meters (25 miles).
@@ -28,7 +28,7 @@ module RestaurantsHelper
 		# https://www.yelp.com/developers/documentation/v2/search_api
 		{
 			term: 'food',
-			limit: 3,
+			limit: 10,
 			sort: 0 # 0=best matched, 1=distance, 2=highest rated
 			# category_filter: , # category to filter search results https://www.yelp.com/developers/documentation/v2/all_category_list
 			# radius_filter: , # search radius, in meters. The max value is 40000 meters (25 miles).

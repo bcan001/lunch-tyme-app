@@ -68,6 +68,7 @@ class Menu
 
 	def query_zomato(header_params,query_params,endpoint_extension)
 		@params = header_params
+		# binding.pry
 		@uri = URI.parse("#{@zomato_api_endpoint}/#{endpoint_extension}")
 		@uri.query = URI.encode_www_form(@params)
 		JSON.parse(open(@uri, header_params).read)
