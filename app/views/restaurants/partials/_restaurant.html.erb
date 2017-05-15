@@ -1,0 +1,30 @@
+<div class="row pad5 ctr">
+	<div class="medium-12 columns">
+			<div class="row pad5">
+				<div class="medium-2 columns">
+					<img src="<%= restaurant.image_url %>", width="50" , height="50"></img>
+				</div>
+				<div class="medium-2 columns">
+					<%= link_to restaurant.name, restaurant_path(restaurant.id) %>
+				</div>
+				<div class="medium-2 columns">
+					<img src="<%= restaurant.rating_img_url_small %>"></img>
+				</div>
+				<div class="medium-2 columns">
+					<%= restaurant.phone %>
+				</div>
+				<div class="medium-2 columns">
+					link to menu
+				</div>
+				<div class="medium-2 columns">
+					link to order
+				</div>
+			</div>
+		<div class="row pad5">
+			<div class="medium-12 columns">
+				<hr>
+			</div>
+		</div>
+	</div>
+</div>
+

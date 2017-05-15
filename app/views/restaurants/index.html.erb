@@ -34,30 +34,44 @@
 	</div>
 </div>
 
-<div class="row ctr">
-	<div class="medium-12 columns">
-		<h4>RESTAURANTS OF THE DAY</h4>
-		<h5><%= Date.today.to_s(:long) %></h5>
+
+<% if params[:find_food_based_on_history] || params[:find_food_based_on_search] %>
+	<div id='query-restaurants'>
+		<div class="restaurant">
+			<%= render partial: "restaurants/partials/restaurant", collection: @restaurants, as: :restaurant %>
+		</div>
 	</div>
-</div>
-
-<!-- re-render whenever someone votes on a restaurant -->
-<%= react_component('RestaurantOfTheDayBox', {:all_restaurants => @restaurants_of_the_day.to_json}) %>
-
-
-<div id='historical-restaurants'>
-	<div class="restaurant">
-		<%= render partial: "restaurants/partials/historical_restaurant", collection: @historical_restaurants, as: :historical_restaurant %>
+<% else %>
+	
+	<div class="row ctr">
+		<div class="medium-12 columns">
+			<h4>RESTAURANTS OF THE DAY</h4>
+			<h5><%= Date.today.to_s(:long) %></h5>
+		</div>
 	</div>
-</div>
 
-<div class='row pad5'>
-	<div class='medium-12 columns ctr'>
-	  <div id='paginator'>
-	    <%= paginate @historical_restaurants, remote: true %>
-	  </div>
+	<!-- re-render whenever someone votes on a restaurant -->
+	<%= react_component('RestaurantOfTheDayBox', {:all_restaurants => @restaurants_of_the_day.to_json}) %>
+
+
+	<div id='historical-restaurants'>
+		<div class="restaurant">
+			<%= render partial: "restaurants/partials/historical_restaurant", collection: @historical_restaurants, as: :historical_restaurant %>
+		</div>
 	</div>
-</div>
+
+	<div class='row pad5'>
+		<div class='medium-12 columns ctr'>
+		  <div id='paginator'>
+		    <%= paginate @historical_restaurants, remote: true %>
+		  </div>
+		</div>
+	</div>
+
+
+<% end %>
+
+
 
 
 
