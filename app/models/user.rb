@@ -18,7 +18,9 @@ class User < ApplicationRecord
   end
 
   def user_location
+  	# binding.pry
   	Geocoder.search(self.remote_ip)
+  	# Geocoder.search('50.131.44.114')
   end
 
 	def current_location_city
